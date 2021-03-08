@@ -4,7 +4,6 @@
 using namespace std;
 
 void sideInput(int* side);
-void triangleInput(int* side1, int* side2, int* side3);
 void makeSide1Longest(int* side1, int* side2, int* side3);
 bool isTriangleNotExist(int side1, int side2, int side3);
 bool isTriangleEquilateral(int side1, int side2, int side3);
@@ -20,7 +19,9 @@ int main()
 
 	cout << "This programm will define triangle type after entering all 3 sides." << endl << endl;
 
-	triangleInput(&side1, &side2, &side3);
+	sideInput(&side1);
+	sideInput(&side2);
+	sideInput(&side3);
 
 	makeSide1Longest(&side1, &side2, &side3);
 
@@ -42,17 +43,8 @@ int main()
 
 void sideInput(int* side)
 {
+	cout << "Enter the side length: ";
 	cin >> *side;
-}
-
-void triangleInput(int* side1, int* side2, int* side3)
-{
-	cout << "Enter the 1st side length: ";
-	sideInput(side1);
-	cout << "Enter the 2nd side length: ";
-	sideInput(side2);
-	cout << "Enter the 3rd side length: ";
-	sideInput(side3);
 }
 
 void makeSide1Longest(int* side1, int* side2, int* side3)
