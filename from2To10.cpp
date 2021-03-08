@@ -19,10 +19,8 @@ int main()
 		binaryNumber /= 10;
 	}
 	
-	cout << "Decimal number is " << decimalNumber << endl;
+	cout << "Decimal number is " << decimalNumber << endl << endl;
 	
-
-	cout << endl;
 	system("pause");
 	return 0;
 }
