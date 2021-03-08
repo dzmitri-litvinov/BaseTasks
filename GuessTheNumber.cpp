@@ -13,7 +13,7 @@ int main()
 	srand(time(NULL));
 	numberByComp = rand() % 10 + 1;
 
-	while (1)
+	while (true)
 	{
 		cout << "Enter your number: ";
 		cin >> numberByUser;
@@ -22,8 +22,7 @@ int main()
 		{
 			cout << endl << "***********" << endl << "You are right!!!" << endl << endl;
 
-			system("pause");
-			return 0;
+			break;
 		}
 		else if (numberByComp < numberByUser)
 		{
@@ -31,4 +30,7 @@ int main()
 		}
 		else { cout << "Try smth more... "; }
 	}
+
+	system("pause");
+	return 0;
 }
