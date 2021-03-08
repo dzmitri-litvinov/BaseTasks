@@ -24,7 +24,7 @@ int main()
 		a = numb2;
 	}
 
-	while (1)
+	while (true)
 	{
 		if (b % a)
 		{
@@ -36,11 +36,12 @@ int main()
 		{
 			GreatestCommonDivisor = a;
 			LeastCommonMultiple = numb1 * numb2 / GreatestCommonDivisor;
-			cout << endl << "The least common multiple is " << LeastCommonMultiple << endl;
+			cout << endl << "The least common multiple is " << LeastCommonMultiple << endl << endl;
 
-			cout << endl;
-			system("pause");
-			return 0;
+			break;
 		}
 	}
+
+	system("pause");
+	return 0;
 }
