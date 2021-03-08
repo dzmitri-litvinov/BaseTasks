@@ -4,7 +4,7 @@
 using namespace std;
 
 void sideInput(int* side);
-void triangleInput(int *side1, int *side2, int *side3);
+void triangleInput(int* side1, int* side2, int* side3);
 void makeSide1Longest(int* side1, int* side2, int* side3);
 bool isTriangleNotExist(int side1, int side2, int side3);
 bool isTriangleEquilateral(int side1, int side2, int side3);
@@ -30,9 +30,10 @@ int main()
 		cout << endl;
 		system("pause");
 		return -1;
-	}	else {}
-	
-	triangleTypeDefinition(side1, side2, side3);	
+	}
+	else {}
+
+	triangleTypeDefinition(side1, side2, side3);
 
 	cout << endl;
 	system("pause");
@@ -44,7 +45,7 @@ void sideInput(int* side)
 	cin >> *side;
 }
 
-void triangleInput(int *side1, int *side2, int *side3)
+void triangleInput(int* side1, int* side2, int* side3)
 {
 	cout << "Enter the 1st side length: ";
 	sideInput(side1);
@@ -60,11 +61,11 @@ void makeSide1Longest(int* side1, int* side2, int* side3)
 	swapSidesIfRequired(side1, side3);
 }
 
-void swapSidesIfRequired(int *side1, int *side2)
+void swapSidesIfRequired(int* side1, int* side2)
 {
 	int temp;
 
-	if ((*side1) < (*side2))
+	if (*side1 < *side2)
 	{
 		temp = *side1;
 		*side1 = *side2;
@@ -74,48 +75,27 @@ void swapSidesIfRequired(int *side1, int *side2)
 
 bool isTriangleNotExist(int side1, int side2, int side3)
 {
-	if (side1 > (side2 + side3))
-	{
-		return true;
-	}
-
-	return false;
+	return side1 > (side2 + side3);
 }
 
 bool isTriangleEquilateral(int side1, int side2, int side3)
 {
-	if (side1 == side2 and side2 == side3)
-	{
-		return true;
-	}
-	else { return false; }
+	return side1 == side2 and side2 == side3;
 }
 
 bool isTriangleRight(int side1, int side2, int side3)
 {
-	if (pow(side1, 2) == (pow(side2, 2) + pow(side3, 2)))
-	{
-		return true;
-	}
-	else { return false; }
+	return pow(side1, 2) == (pow(side2, 2) + pow(side3, 2));
 }
 
 bool isTriangleAcuteAngled(int side1, int side2, int side3)
 {
-	if (pow(side1, 2) < (pow(side2, 2) + pow(side3, 2)))
-	{
-		return true;
-	}
-	else { return false; }
+	return pow(side1, 2) < (pow(side2, 2) + pow(side3, 2));
 }
 
 bool isTriangleIsosceles(int side1, int side2, int side3)
 {
-	if (side1 == side2 or side2 == side3)
-	{
-		return true;
-	}
-	else { return false; }
+	return side1 == side2 or side2 == side3 or side1 == side3;
 }
 
 void triangleTypeDefinition(int side1, int side2, int side3)
