@@ -14,9 +14,8 @@ int main()
 
 	temp = number * 10;
 
-	cout << "The first number after point is " << temp % 10;
+	cout << "The first number after point is " << temp % 10 << endl;
 
-	cout << endl;
 	system("pause");
 	return 0;
 }
