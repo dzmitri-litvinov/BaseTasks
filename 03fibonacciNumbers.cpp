@@ -2,45 +2,45 @@
 
 using namespace std;
 
-void fibonacciNumberPositionInput(int* fibonacciNumberPosition);
-int fibinacciNumberInPositionNCalculation(int fibonacciNumberPosition);
+void inputNumberPosition(int* numberPosition);
+int calculateNumberInPosition(int numberPosition);
 
 int main()
 {
-	int fibonacciNumberPosition, fibonacciNumberInDesiredPosition;
+	int numberPosition, numberInDesiredPosition;
 
 	cout << "This program will show you the Fibonacci number in desired position." << endl << endl;
 
-	fibonacciNumberPositionInput(&fibonacciNumberPosition);
-	fibonacciNumberInDesiredPosition = fibinacciNumberInPositionNCalculation(fibonacciNumberPosition);
+	inputNumberPosition(&numberPosition);
+	numberInDesiredPosition = calculateNumberInPosition(numberPosition);
 
-	cout << "Your Fibonacci number is " << fibonacciNumberInDesiredPosition << endl << endl;
+	cout << "Your Fibonacci number is " << numberInDesiredPosition << endl << endl;
 
 	system("pause");
 	return 0;
 }
 
-void fibonacciNumberPositionInput(int* fibonacciNumberPosition)
+void inputNumberPosition(int* numberPosition)
 {
 	cout << "Enter the desired position of the Fibonacci number you want to see: ";
-	cin >> *fibonacciNumberPosition;
+	cin >> *numberPosition;
 }
 
-int fibinacciNumberInPositionNCalculation(int fibonacciNumberPosition)
+int calculateNumberInPosition(int numberPosition)
 {
 	int numberBefore = 0, numberCurrent = 1;
 
-	if (fibonacciNumberPosition == 1)
+	if (numberPosition == 1)
 	{
 		return numberBefore;
 	}
-	else if (fibonacciNumberPosition == 2)
+	else if (numberPosition == 2)
 	{
 		return numberCurrent;
 	}
 	else
 	{
-		for (int i = 0; i < fibonacciNumberPosition - 2; i++)
+		for (int i = 0; i < numberPosition - 2; i++)
 		{
 			int temp = numberCurrent;
 			numberCurrent += numberBefore;
