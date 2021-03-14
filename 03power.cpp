@@ -3,8 +3,7 @@
 using namespace std;
 
 double calculateNumberInPower(double numberX, int powerN);
-void inputNumberX(double* numberX);
-void inputPowerN(int* powerN);
+double inputNumber();
 
 int main()
 {
@@ -13,8 +12,11 @@ int main()
 
 	cout << "This program raises the number x to the power n." << endl << endl;
 
-	inputNumberX(&numberX);
-	inputPowerN(&powerN);
+	cout << "Enter your number x: ";
+	numberX = inputNumber();
+	cout << "Enter your power n: ";
+	powerN = inputNumber();
+
 
 	if (numberX == 0)
 	{
@@ -32,16 +34,13 @@ int main()
 	return 0;
 }
 
-void inputPowerN(int* powerN)
+double inputNumber()
 {
-	cout << "Enter your power n: ";
-	cin >> *powerN;
-}
+	double number;
 
-void inputNumberX(double* numberX)
-{
-	cout << "Enter your number x: ";
-	cin >> *numberX;
+	cin >> number;
+
+	return number;
 }
 
 double calculateNumberInPower(double numberX, int powerN)
