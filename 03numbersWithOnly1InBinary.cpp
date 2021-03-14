@@ -4,7 +4,7 @@
 using namespace std;
 
 int fromBinaryToDecimal(int binaryNumber);
-void printOnly1ContainBinary(int decimalNumberEntered);
+void printOnlyOneContainBinary(int decimalNumberEntered);
 
 int main()
 {
@@ -15,7 +15,7 @@ int main()
 	cout << "Enter desired decimal number: ";
 	cin >> decimalNumberEntered;
 
-	printOnly1ContainBinary(decimalNumberEntered);
+	printOnlyOneContainBinary(decimalNumberEntered);
 
 	system("pause");
 	return 0;
@@ -35,15 +35,14 @@ int fromBinaryToDecimal(int binaryNumber)
 	return decimalNumber;
 }
 
-void printOnly1ContainBinary(int decimalNumberEntered)
+void printOnlyOneContainBinary(int decimalNumberEntered)
 {
 	int binaryNumber = 1, add1 = 10;
 
 	while (decimalNumberEntered >= fromBinaryToDecimal(binaryNumber))
 	{
 		cout << "decimal: " << fromBinaryToDecimal(binaryNumber);
-		//cout << "\t\tbinary: " << binaryNumber << endl;
-
+		
 		binaryNumber += add1;
 		add1 *= 10;
 	}
