@@ -2,9 +2,9 @@
 
 using namespace std;
 
-double numberInPower(double numberX, int powerN);
-void numberXInput(double* numberX);
-void powerNInput(int* powerN);
+double calculateNumberInPower(double numberX, int powerN);
+void inputNumberX(double* numberX);
+void inputPowerN(int* powerN);
 
 int main()
 {
@@ -13,8 +13,8 @@ int main()
 
 	cout << "This program raises the number x to the power n." << endl << endl;
 
-	numberXInput(&numberX);
-	powerNInput(&powerN);
+	inputNumberX(&numberX);
+	inputPowerN(&powerN);
 
 	if (numberX == 0)
 	{
@@ -24,7 +24,7 @@ int main()
 		return -1;
 	}
 
-	numberXInPowerN = numberInPower(numberX, powerN);
+	numberXInPowerN = calculateNumberInPower(numberX, powerN);
 
 	cout << endl << "The number x = " << numberX << " in the power of n = " << powerN << " is " << numberXInPowerN << endl << endl;
 
@@ -32,19 +32,19 @@ int main()
 	return 0;
 }
 
-void powerNInput(int* powerN)
+void inputPowerN(int* powerN)
 {
 	cout << "Enter your power n: ";
 	cin >> *powerN;
 }
 
-void numberXInput(double* numberX)
+void inputNumberX(double* numberX)
 {
 	cout << "Enter your number x: ";
 	cin >> *numberX;
 }
 
-double numberInPower(double numberX, int powerN)
+double calculateNumberInPower(double numberX, int powerN)
 {
 	double result = 1;
 
@@ -54,9 +54,8 @@ double numberInPower(double numberX, int powerN)
 		{
 			result *= numberX;
 		}
-	}
-
-	if (powerN < 0)
+	} 
+	else if (powerN < 0)
 	{
 		for (int i = 0; i > powerN; i--)
 		{
