@@ -2,21 +2,17 @@
 
 using namespace std;
 
-double calculateNumberInPower(double numberX, int powerN);
-double inputNumber();
+double calculateNumberInPower(double numberX, double powerN);
+double inputNumber(double number, string s);
 
 int main()
 {
-	double numberX, numberXInPowerN;
-	int powerN;
-
+	double numberX = 0, powerN = 0, numberXInPowerN;
+	
 	cout << "This program raises the number x to the power n." << endl << endl;
 
-	cout << "Enter your number x: ";
-	numberX = inputNumber();
-	cout << "Enter your power n: ";
-	powerN = inputNumber();
-
+	numberX = inputNumber(numberX, "number x: ");
+	powerN = inputNumber(powerN, "power n: ");
 
 	if (numberX == 0)
 	{
@@ -34,16 +30,15 @@ int main()
 	return 0;
 }
 
-double inputNumber()
+double inputNumber(double number, string s)
 {
-	double number;
-
+	cout << "Enter your " << s;
 	cin >> number;
 
 	return number;
 }
 
-double calculateNumberInPower(double numberX, int powerN)
+double calculateNumberInPower(double numberX, double powerN)
 {
 	double result = 1;
 
