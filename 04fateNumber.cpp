@@ -11,16 +11,28 @@ int calculateSingleNumber(int number);
 int calculateFateNumber(int year, int month, int day);
 void printFateNumber(int fateNumber);
 void printDecription();
+bool isMonthWrong(int month);
+bool isDayWrong(int day, int month, int year);
+bool isYearLip(int year);
+bool isMonth31Days(int month);
 
 int main()
 {
-	int year = 0, month = 0, day = 0, fateNumber;
+	int year = 0, month = 0, day = 0;
 
 	printDecription();
 
 	year = input(year, "year: ");
-	month = input(month, "month: ");
-	day = input(day, "day: ");
+
+	while (isMonthWrong(month))
+	{
+		month = input(month, "month: ");
+	}
+
+	while (isDayWrong(day, month, year))
+	{
+		day = input(day, "day: ");
+	}
 
 	printFateNumber(calculateFateNumber(year, month, day));
 
@@ -72,4 +84,83 @@ int calculateFateNumber(int year, int month, int day)
 	number = calculateSingleNumber(year) + calculateSingleNumber(month) + calculateSingleNumber(day);
 
 	return calculateSingleNumber(number);
+}
+
+bool isMonthWrong(int month)
+{
+	bool flag = false;
+
+	if (month < 1 or month >12)
+	{
+		flag = true;
+	}
+
+	return flag;
+}
+
+bool isDayWrong(int day, int month, int year)
+{
+	bool flag = false;
+
+	if (day < 1)
+	{
+		flag = true;
+	}
+	else if (isMonth31Days(month))
+	{
+		if (day > 31)
+		{
+			flag = true;
+		}
+	}
+	else if (month == 2)
+	{
+		if (isYearLip(year))
+		{
+			if (day > 29)
+			{
+				flag = true;
+			}
+		}
+		else
+		{
+			if (day > 28)
+			{
+				flag = true;
+			}
+		}
+	}
+	else
+	{
+		if (day > 30)
+		{
+			flag = true;
+		}
+	}
+
+	return flag;
+}
+
+bool isYearLip(int year)
+{
+	bool flag = true;
+
+	if (year % 4)
+	{
+		flag = false;
+	}
+
+	return flag;
+}
+
+bool isMonth31Days(int month)
+{
+	bool flag = false;
+
+	if (month == 1 or month == 3 or month == 5 or month == 7 or month == 8 or month == 10 or month == 12)
+	{
+		flag = true;
+	}
+
+	return flag;
 }
