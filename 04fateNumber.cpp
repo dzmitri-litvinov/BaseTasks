@@ -22,12 +22,7 @@ int main()
 	month = input(month, "month: ");
 	day = input(day, "day: ");
 
-	//fateNumber = calculateSingleNumber(year) + calculateSingleNumber(month) + calculateSingleNumber(day);
-	//fateNumber = calculateSingleNumber(fateNumber);
-
-	fateNumber = calculateFateNumber(year, month, day);
-
-	printFateNumber(fateNumber);
+	printFateNumber(calculateFateNumber(year, month, day));
 
 	return 0;
 }
