@@ -24,10 +24,9 @@ bool isDiagonalWin(char table[3][3]);
 bool isWin(char table[3][3]);
 void printWin(string player);
 void printDraw();
-void chooseCellComputer(string player, char playerSign, char table[3][3], int turnCounter, char humanSign, char computerSign, int cellByHuman);
-int cellByComp(char table[3][3], char humanSign, char computerSign, int turnCounter, int cellByHuman);
-int cellByComp1st(int turnCounter, int cellByHuman);
-int cellByComp2nd(char table[3][3]);
+void chooseCellComputer(string player, char playerSign, char table[3][3], int turnCounter, char humanSign, char computerSign, int cellByHuman, int cellByHumanHistory[5]);
+int cellByComp(char table[3][3], char humanSign, char computerSign, int turnCounter, int cellByHuman, int cellByHumanHistory[5]);
+int cellByCompX3rdTurn(int turnCounter, int cellByHuman);
 int cellByCompForWin(char table[3][3], char computerSign);
 int cellByCompForNotLoose(char table[3][3], char humanSign);
 int cellByCompOdd(char table[3][3]);
@@ -37,16 +36,17 @@ int main()
 {
 	char table[3][3];
 	string player1, player2, playerInTurn;
-	int gameCounter = 1, turnCounter = 1, choice = 0, cellByHuman = 0;
+	int gameCounter = 1, turnCounter = 1, choice = 0, cellByHuman = 0,  turnByHuman;
+	int cellByHumanHistory[5];
 	char humanSign = X_SIGN, computerSign = O_SIGN, signInTurn;
-	bool isGameOngoing = true;
+	bool isPlayer = true;
 	
 	initialTableFill(table);
 	printDescription();
 	printTable(table);
 
-	player1 = getPlayerName(player1, 1);
-	//player1 = "Dm";
+	//player1 = getPlayerName(player1, 1);
+	player1 = "Dm";
 	player2 = "Computer";
 
 	while (true)
@@ -54,7 +54,8 @@ int main()
 		initialTableFill(table);
 		cellByHuman = 0;
 		turnCounter = 0;
-		
+		turnByHuman = 0;
+				
 		while (true)
 		{
 			if ((gameCounter + turnCounter) % 2)
@@ -70,8 +71,7 @@ int main()
 
 			if (playerInTurn == "Computer")
 			{
-				printPlayScreen(player1, player2, table, humanSign, computerSign);
-				chooseCellComputer(playerInTurn, signInTurn, table, turnCounter, humanSign, computerSign, cellByHuman);
+				chooseCellComputer(playerInTurn, signInTurn, table, turnCounter, humanSign, computerSign, cellByHuman, cellByHumanHistory);
 			}
 			else
 			{
@@ -79,6 +79,8 @@ int main()
 				
 				cellByHuman = inputCell(playerInTurn, table, cellByHuman);
 				changeCellInTable(cellByHuman, table, signInTurn);
+				cellByHumanHistory[turnByHuman] = cellByHuman;
+				turnByHuman++;
 			}
 			
 			turnCounter++;
@@ -295,52 +297,63 @@ void printDraw()
 	cout << endl << "*** DRAW ***" << endl << endl;
 }
 
-void chooseCellComputer(string player, char playerSign, char table[3][3], int turnCounter, char humanSign, char computerSign, int cellByHuman)
+void chooseCellComputer(string player, char playerSign, char table[3][3], int turnCounter, char humanSign, char computerSign, int cellByHuman, int cellByHumanHistory[5])
 {
 	int cell = 0;
 
-	cell = cellByComp(table, humanSign, computerSign, turnCounter, cellByHuman);
+	cell = cellByComp(table, humanSign, computerSign, turnCounter, cellByHuman, cellByHumanHistory);
 	
-	
-
 	changeCellInTable(cell, table, playerSign);
 }
 
-int cellByComp(char table[3][3], char humanSign, char computerSign, int turnCounter, int cellByHuman)
+int cellByComp(char table[3][3], char humanSign, char computerSign, int turnCounter, int cellByHuman, int cellByHumanHistory[5])
 {
 	int temp;
 
-	temp = cellByComp1st(turnCounter, cellByHuman);
-
-	if (temp != 0)
-		return temp;
-
-	temp = cellByComp2nd(table);
+	temp = cellByCompX3rdTurn(turnCounter, cellByHuman);
 
 	if (temp != 0)
 		return temp;
 
 	temp = cellByCompForWin(table, computerSign);
-
 	if (temp != 0)
 		return temp;
 
 	temp = cellByCompForNotLoose(table, humanSign);
-
 	if (temp != 0)
 		return temp;
 
-	temp = cellByCompOdd(table);
+	if (turnCounter == 3 and table[1][1] == O_SIGN)
+	{
+		if ((cellByHumanHistory[0] % 2) * (cellByHumanHistory[1] % 2))
+		{
+			return cellByCompEven(table);
+		}
+		else
+		{
+			int evenCell = 0;
 
+			if (cellByHumanHistory[0] % 2) 
+				evenCell = cellByHumanHistory[1];
+			else 
+				evenCell = cellByHumanHistory[0];
+
+			if (evenCell == 8 or evenCell == 4)
+				return 7;
+			else
+				return 3;
+		}
+	}
+
+	temp = cellByCompOdd(table);
 	if (temp != 0)
 		return temp;
 	
 	temp = cellByCompEven(table);
-
 	return temp;	
 }
 
-int cellByComp1st(int turnCounter, int cellByHuman)
+int cellByCompX3rdTurn(int turnCounter, int cellByHuman)
 {
 	if (turnCounter == 2)
 	{
@@ -354,21 +367,6 @@ int cellByComp1st(int turnCounter, int cellByHuman)
 		}
 		else {}
 	}
-
-	return 0;
-}
-
-int cellByComp2nd(char table[3][3])
-{
-	if (isCellNumberApplicable(5, table))
-	{
-		return 5;
-	}
-	else if (isCellNumberApplicable(1, table))
-	{
-		return 1;
-	}
-	else {}
 
 	return 0;
 }
@@ -419,6 +417,11 @@ int cellByCompForNotLoose(char table[3][3], char humanSign)
 
 int cellByCompOdd(char table[3][3])
 {
+	if (isCellNumberApplicable(5, table))
+	{
+		return 5;
+	}
+
 	for (int i = 1; i < 10; i += 2)
 	{
 		if (isCellNumberApplicable(i, table))
