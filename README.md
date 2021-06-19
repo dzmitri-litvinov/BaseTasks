@@ -1,2 +1,4 @@
 # BaseTasks
-Repository with home tasks
+This public repository contains console applications:
+##[1]
+*1
